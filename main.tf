@@ -9,7 +9,9 @@
 module "kms" {
   source = "./modules/kms"
 }
-#
-# module "cognito" {
-#   source = "./modules/cognito"
-# }
+
+module "cognito" {
+  source = "./modules/cognito"
+  region = var.region
+  profile = "b3"
+}

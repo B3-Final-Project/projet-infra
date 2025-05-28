@@ -2,17 +2,17 @@ resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
   account_recovery_setting {
     recovery_mechanism {
       name     = "verified_email"
-      priority = "1"
+      priority = 1
     }
 
     recovery_mechanism {
       name     = "verified_phone_number"
-      priority = "2"
+      priority = 2
     }
   }
 
   admin_create_user_config {
-    allow_admin_create_user_only = "false"
+    allow_admin_create_user_only = false
   }
 
   auto_verified_attributes = ["email"]
@@ -23,55 +23,55 @@ resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
   }
 
   mfa_configuration = "OPTIONAL"
-  name              = "User pool - 1zfokm"
+  name              = "terraform-cognito-user-pool"
 
   password_policy {
-    minimum_length                   = "8"
-    password_history_size            = "0"
-    require_lowercase                = "true"
-    require_numbers                  = "true"
-    require_symbols                  = "true"
-    require_uppercase                = "true"
-    temporary_password_validity_days = "7"
+    minimum_length                   = 8
+    password_history_size            = 0
+    require_lowercase                = true
+    require_numbers                  = true
+    require_symbols                  = true
+    require_uppercase                = true
+    temporary_password_validity_days = 7
   }
 
   schema {
     attribute_data_type      = "Number"
-    developer_only_attribute = "false"
-    mutable                  = "true"
+    developer_only_attribute = false
+    mutable                  = true
     name                     = "hasProfile"
 
     number_attribute_constraints {
-      max_value = "1"
-      min_value = "0"
+      max_value = 1
+      min_value = 0
     }
 
-    required = "false"
+    required = false
   }
 
   schema {
     attribute_data_type      = "String"
-    developer_only_attribute = "false"
-    mutable                  = "true"
+    developer_only_attribute = false
+    mutable                  = true
     name                     = "display_name"
-    required                 = "false"
+    required                 = false
 
     string_attribute_constraints {
-      max_length = "12"
-      min_length = "3"
+      max_length = 12
+      min_length = 3
     }
   }
 
   schema {
     attribute_data_type      = "String"
-    developer_only_attribute = "false"
-    mutable                  = "true"
+    developer_only_attribute = false
+    mutable                  = true
     name                     = "email"
-    required                 = "true"
+    required                 = true
 
     string_attribute_constraints {
-      max_length = "2048"
-      min_length = "0"
+      max_length = 2048
+      min_length = 0
     }
   }
 
@@ -86,14 +86,14 @@ resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
   }
 
   software_token_mfa_configuration {
-    enabled = "true"
+    enabled = true
   }
 
   user_pool_tier      = "ESSENTIALS"
   username_attributes = ["email", "phone_number"]
 
   username_configuration {
-    case_sensitive = "false"
+    case_sensitive = false
   }
 
   verification_message_template {
