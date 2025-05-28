@@ -39,3 +39,6 @@ terraform.rc
 # IDE specific files
 .idea/
 .vscode/
+
+# Ignore any local environment files
+.env
