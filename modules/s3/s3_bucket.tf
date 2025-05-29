@@ -1,28 +1,18 @@
 resource "aws_s3_bucket" "tf--holomatch-images" {
-  bucket        = "holomatch-images"
-  force_destroy = "false"
+  bucket = var.bucket_name
+  tags = var.tags
+}
 
-  grant {
-    id          = "7e9d7bdbc3b085bed62867e92d7ebcdade230fee442ff2d5717d083b0447bff3"
-    permissions = ["FULL_CONTROL"]
-    type        = "CanonicalUser"
-  }
+# Block all public access at the bucket level
+resource "aws_s3_bucket_public_access_block" "tf--holomatch-images-public-access-block" {
+  bucket                  = aws_s3_bucket.tf--holomatch-images.id
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
 
-  object_lock_enabled = "false"
-  request_payer       = "BucketOwner"
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-
-      bucket_key_enabled = "true"
-    }
-  }
-
-  versioning {
-    enabled    = "false"
-    mfa_delete = "false"
-  }
+resource "aws_s3_access_point" "s3_dev_access_point" {
+  bucket = aws_s3_bucket.tf--holomatch-images.id
+  name   = "tf-dev-access-point"
 }
