@@ -1,4 +1,3 @@
-
 variable "google_client_id" {
   sensitive = true
 }
@@ -15,4 +14,10 @@ variable "region" {
 variable "profile" {
   description = "AWS profile to use for authentication"
   type        = string
+}
+
+variable "frontend_url" {
+  description = "The URL of the frontend application"
+  type        = string
+  default     = "https://holomatch.org"
 }

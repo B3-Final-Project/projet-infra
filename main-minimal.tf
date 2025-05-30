@@ -1,3 +1,6 @@
+# Minimal configuration keeping only the essential components
+# Use this when you want to destroy ECS and RDS but keep certificates
+
 module "networks" {
   source = "./modules/networks"
 }
@@ -9,16 +12,6 @@ module "s3" {
 module "ecr" {
   source = "./modules/ecr"
 }
-
-# Commented out expensive components - uncomment when ready to restore
-# module "rds" {
-#   source = "./modules/rds"
-#   aws_vpc_id = module.networks.aws_vpc_main_id
-#   aws_subnet_ids = module.networks.private_aws_subnet_ids
-#   db_password = "dopfiushobvypsurib4328907452kedwkvo_%tfs"
-#   db_name = "b3db"
-#   db_username = "postgres"
-# }
 
 module "kms" {
   source = "./modules/kms"
@@ -33,7 +26,22 @@ module "cognito" {
   frontend_url = "holomatch.org"
 }
 
-# Commented out expensive components - uncomment when ready to restore
+# Route53 module with certificate but without ALB-dependent DNS records
+module "route53_minimal" {
+  source = "./modules/route53-minimal"
+  domain_name = "holomatch.org"
+}
+
+# Commented out expensive components
+# module "rds" {
+#   source = "./modules/rds"
+#   aws_vpc_id = module.networks.aws_vpc_main_id
+#   aws_subnet_ids = module.networks.private_aws_subnet_ids
+#   db_password = "dopfiushobvypsurib4328907452kedwkvo_%tfs"
+#   db_name = "b3db"
+#   db_username = "postgres"
+# }
+
 # module "ecs" {
 #   source = "./modules/ecs"
 #   vpc_id = module.networks.aws_vpc_main_id
@@ -53,9 +61,3 @@ module "cognito" {
 #   cognito_hosted_ui_domain = module.cognito.hosted_ui_domain
 #   certificate_arn = module.route53_minimal.certificate_arn
 # }
-
-# Route53 minimal module - keeps certificate and hosted zone, removes ALB-dependent records
-module "route53_minimal" {
-  source = "./modules/route53-minimal"
-  domain_name = "holomatch.org"
-}

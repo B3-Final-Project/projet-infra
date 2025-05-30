@@ -1,0 +1,58 @@
+# Backend Task Definition
+resource "aws_ecs_task_definition" "backend" {
+  family                   = "b3-backend"
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = 256
+  memory                   = 512
+  execution_role_arn       = var.ecs_task_execution_role_arn
+  task_role_arn           = var.ecs_task_role_arn
+
+  container_definitions = jsonencode([
+    {
+      name      = "backend"
+      image     = "${var.ecr_backend_repository_url}:e8f7fbe749baaabe367fd6c4ba9586a7219d0a66"
+      essential = true
+
+      portMappings = [
+        {
+          containerPort = 8080
+          protocol      = "tcp"
+        }
+      ]
+
+      environment = [
+        {name: "AWS_REGION", value: var.region},
+        {name: "AWS_ACCESS_KEY_ID", value: "AKIA6MXPO24FP5RTUOX2"},
+        {name: "AWS_SECRET_ACCESS_KEY", value: "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"},
+        {name: "COGNITO_USER_POOL", value: var.cognito_user_pool_id},
+        {name: "S3_BUCKET_NAME", value: var.s3_bucket_name},
+        {name: "FRONTEND_URL", value: var.frontend_url},
+        {name: "DATABASE_HOST", value: var.rds_endpoint},
+        {name: "DATABASE_USER", value: var.db_username},
+        {name: "DATABASE_NAME", value: var.db_name},
+        {name: "NODE_ENV", value: "production"},
+      ]
+
+      secrets = [
+        {
+          name      = "DATABASE_PASSWORD"
+          valueFrom = var.db_password_secret_arn
+        }
+      ]
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.backend.name
+          awslogs-region        = var.region
+          awslogs-stream-prefix = "ecs"
+        }
+      }
+    }
+  ])
+
+  tags = {
+    Name = "b3-backend-task"
+  }
+}

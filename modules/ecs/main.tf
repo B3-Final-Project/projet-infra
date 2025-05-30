@@ -1,0 +1,39 @@
+module "backend" {
+  source = "./backend"
+  ecs_cluster_id = aws_ecs_cluster.main.id
+  private_subnet_ids = var.private_subnet_ids
+  ecs_task_execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  ecs_task_role_arn = aws_iam_role.ecs_task_role.arn
+  ecr_backend_repository_url = var.ecr_backend_repository_url
+  rds_endpoint = var.rds_endpoint
+  db_name = var.db_name
+  db_username = var.db_username
+  db_password_secret_arn = var.db_password_secret_arn
+  region = var.region
+  aws_service_discovery_main_dns_namespace = aws_service_discovery_private_dns_namespace.main.id
+  frontend_ecs_security_group_id = module.frontend.aws_frontend_ecs_security_group_id
+  vpc_id = var.vpc_id
+  cognito_user_pool_id = var.cognito_user_pool_id
+  s3_bucket_name = var.s3_bucket_name
+  frontend_url = var.frontend_url
+}
+
+module "frontend" {
+  source = "./frontend"
+  aws_ecs_cluster_id = aws_ecs_cluster.main.id
+  ecr_frontend_repository_url = var.ecr_frontend_repository_url
+  ecs_task_execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  ecs_task_role_arn = aws_iam_role.ecs_task_role.arn
+  public_subnet_ids = var.public_subnet_ids
+  region = var.region
+  main_alb_arn = aws_lb.main.arn
+  vpc_id = var.vpc_id
+  aws_alb_security_group_id = aws_security_group.alb.id
+  cognito_user_pool_id = var.cognito_user_pool_id
+  cognito_user_pool_client_id = var.cognito_user_pool_client_id
+  cognito_hosted_ui_domain = var.cognito_hosted_ui_domain
+  frontend_url = var.frontend_url
+  backend_url = "http://backend.local:3000"
+  s3_bucket_name = var.s3_bucket_name
+  certificate_arn = var.certificate_arn
+}
