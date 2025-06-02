@@ -11,8 +11,8 @@ resource "aws_cognito_identity_provider" "google" {
   }
 
   provider_details = {
-    client_id         = "157943089258-dsrcv3agum6l5tvlgpugio7tpchhbcnh.apps.googleusercontent.com"
-    client_secret     = "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"
+    client_id         = var.google_client_id
+    client_secret     = var.google_client_secret
     authorize_scopes  = "openid email profile"
   }
 }
