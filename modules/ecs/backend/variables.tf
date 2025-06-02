@@ -3,6 +3,16 @@ variable "region" {
   type        = string
 }
 
+variable "aws_access_key" {
+  description = "The AWS access key for authentication."
+  type        = string
+}
+
+variable "aws_secret_key" {
+  description = "The AWS secret key for authentication."
+  type        = string
+}
+
 variable "ecs_cluster_id" {
   description = "The ID of the ECS cluster where the backend service will be deployed."
   type        = string

@@ -50,6 +50,8 @@ module "ecs" {
   cognito_user_pool_client_id = module.cognito.user_pool_client_id
   cognito_hosted_ui_domain = module.cognito.hosted_ui_domain
   certificate_arn = module.route53.certificate_arn
+  aws_access_key = local.envs["AWS_ACCESS_KEY_ID"]
+  aws_secret_key = local.envs["AWS_SECRET_KEY"]
 }
 
 module "route53" {

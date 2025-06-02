@@ -10,6 +10,8 @@ module "backend" {
   db_username = var.db_username
   db_password_secret_arn = var.db_password_secret_arn
   region = var.region
+  aws_access_key = var.aws_access_key
+  aws_secret_key = var.aws_secret_key
   aws_service_discovery_main_dns_namespace = aws_service_discovery_private_dns_namespace.main.id
   frontend_ecs_security_group_id = module.frontend.aws_frontend_ecs_security_group_id
   vpc_id = var.vpc_id

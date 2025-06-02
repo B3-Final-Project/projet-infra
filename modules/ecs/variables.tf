@@ -18,6 +18,16 @@ variable "region" {
   type        = string
 }
 
+variable "aws_access_key" {
+  description = "AWS access key for authentication"
+  type        = string
+}
+
+variable "aws_secret_key" {
+  description = "AWS secret key for authentication"
+  type        = string
+}
+
 variable "ecr_frontend_repository_url" {
   description = "ECR repository URL for frontend application"
   type        = string

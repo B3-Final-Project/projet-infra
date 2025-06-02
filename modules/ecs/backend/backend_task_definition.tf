@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "backend" {
   container_definitions = jsonencode([
     {
       name      = "backend"
-      image     = "${var.ecr_backend_repository_url}:e8f7fbe749baaabe367fd6c4ba9586a7219d0a66"
+      image     = "${var.ecr_backend_repository_url}:latest"
       essential = true
 
       portMappings = [
@@ -23,8 +23,8 @@ resource "aws_ecs_task_definition" "backend" {
 
       environment = [
         {name: "AWS_REGION", value: var.region},
-        {name: "AWS_ACCESS_KEY_ID", value: "AKIA6MXPO24FP5RTUOX2"},
-        {name: "AWS_SECRET_ACCESS_KEY", value: "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"},
+        {name: "AWS_ACCESS_KEY_ID", value: var.aws_access_key},
+        {name: "AWS_SECRET_ACCESS_KEY", value: var.aws_secret_key},
         {name: "COGNITO_USER_POOL", value: var.cognito_user_pool_id},
         {name: "S3_BUCKET_NAME", value: var.s3_bucket_name},
         {name: "FRONTEND_URL", value: var.frontend_url},
