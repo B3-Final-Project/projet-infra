@@ -35,21 +35,6 @@ variable "main_alb_arn" {
     type        = string
 }
 
-variable "cognito_user_pool_id" {
-  description = "The ID of the Cognito User Pool."
-  type        = string
-}
-
-variable "cognito_user_pool_client_id" {
-  description = "The ID of the Cognito User Pool Client."
-  type        = string
-}
-
-variable "cognito_hosted_ui_domain" {
-  description = "The hosted UI domain for Cognito."
-  type        = string
-}
-
 variable "frontend_url" {
   description = "The URL of the frontend application (ALB DNS name)."
   type        = string

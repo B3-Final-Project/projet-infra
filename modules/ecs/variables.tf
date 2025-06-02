@@ -75,16 +75,6 @@ variable "frontend_url" {
   type        = string
 }
 
-variable "cognito_user_pool_client_id" {
-  description = "The ID of the Cognito User Pool Client"
-  type        = string
-}
-
-variable "cognito_hosted_ui_domain" {
-  description = "The hosted UI domain for Cognito"
-  type        = string
-}
-
 variable "certificate_arn" {
   description = "ARN of the SSL certificate for HTTPS"
   type        = string

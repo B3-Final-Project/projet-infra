@@ -31,9 +31,6 @@ module "frontend" {
   main_alb_arn = aws_lb.main.arn
   vpc_id = var.vpc_id
   aws_alb_security_group_id = aws_security_group.alb.id
-  cognito_user_pool_id = var.cognito_user_pool_id
-  cognito_user_pool_client_id = var.cognito_user_pool_client_id
-  cognito_hosted_ui_domain = var.cognito_hosted_ui_domain
   frontend_url = var.frontend_url
   backend_url = "http://backend.local:3000"
   s3_bucket_name = var.s3_bucket_name

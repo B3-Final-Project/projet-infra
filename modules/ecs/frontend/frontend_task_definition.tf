@@ -27,20 +27,8 @@ resource "aws_ecs_task_definition" "frontend" {
           value = "${var.backend_url}/api"
         },
         {
-          name  = "NEXT_PUBLIC_COGNITO_USER_POOL"
-          value = "https://cognito-idp.eu-west-3.amazonaws.com/${var.cognito_user_pool_id}"
-        },
-        {
-          name  = "NEXT_PUBLIC_COGNITO_CLIENT_ID"
-          value = var.cognito_user_pool_client_id
-        },
-        {
           name = "NEXT_PUBLIC_COGNITO_CALLBACK_URL"
           value = var.frontend_url
-        },
-        {
-          name  = "NEXT_PUBLIC_COGNITO_HOSTED_UI_DOMAIN"
-          value = var.cognito_hosted_ui_domain
         },
         {
           name = "NODE_ENV"
