@@ -22,8 +22,3 @@ output "www_domain_fqdn" {
   description = "Fully qualified domain name for the www subdomain"
   value       = aws_route53_record.www.fqdn
 }
-
-output "certificate_arn" {
-  description = "ARN of the SSL certificate"
-  value       = aws_acm_certificate_validation.main.certificate_arn
-}

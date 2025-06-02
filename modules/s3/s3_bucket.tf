@@ -16,3 +16,10 @@ resource "aws_s3_access_point" "s3_dev_access_point" {
   bucket = aws_s3_bucket.tf--holomatch-images.id
   name   = "tf-dev-access-point"
 }
+
+resource "aws_s3_bucket_ownership_controls" "bucket_ownership_controls" {
+  bucket = var.bucket_name
+  rule {
+      object_ownership = "ObjectWriter"
+  }
+}

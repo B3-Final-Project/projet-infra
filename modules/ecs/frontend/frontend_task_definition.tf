@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "frontend" {
   container_definitions = jsonencode([
     {
       name      = "frontend"
-      image     = "${var.ecr_frontend_repository_url}:latest"
+      image     = "${var.ecr_frontend_repository_url}:9a4875ec85bec6c37e56ea7b71d5e6392297a0ae"
       essential = true
 
       portMappings = [
@@ -23,29 +23,29 @@ resource "aws_ecs_task_definition" "frontend" {
 
       environment = [
         {
-          name  = "NEXT_PUBLIC_BACKEND_URL"
-          value = var.backend_url
+          name  = "BASE_URL"
+          value = "${var.backend_url}/api"
         },
         {
-          name  = "NEXT_PUBLIC_COGNITO_USER_POOL_ID"
-          value = var.cognito_user_pool_id
+          name  = "NEXT_PUBLIC_COGNITO_USER_POOL"
+          value = "https://cognito-idp.eu-west-3.amazonaws.com/${var.cognito_user_pool_id}"
         },
         {
-          name  = "NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID"
+          name  = "NEXT_PUBLIC_COGNITO_CLIENT_ID"
           value = var.cognito_user_pool_client_id
+        },
+        {
+          name = "NEXT_PUBLIC_COGNITO_CALLBACK_URL"
+          value = var.frontend_url
         },
         {
           name  = "NEXT_PUBLIC_COGNITO_HOSTED_UI_DOMAIN"
           value = var.cognito_hosted_ui_domain
         },
         {
-          name  = "NEXT_PUBLIC_S3_BUCKET_NAME"
-          value = var.s3_bucket_name
+          name = "NODE_ENV"
+          value = "production"
         },
-        {
-          name  = "FRONTEND_URL"
-          value = var.frontend_url
-        }
       ]
 
       logConfiguration = {

@@ -58,8 +58,3 @@ output "website_url" {
   description = "URL of the website"
   value       = "https://${module.route53.domain_name}"
 }
-
-output "certificate_arn" {
-  description = "ARN of the SSL certificate"
-  value       = module.route53.certificate_arn
-}

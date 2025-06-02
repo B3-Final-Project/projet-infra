@@ -14,7 +14,7 @@ module "rds" {
   source = "./modules/rds"
   aws_vpc_id = module.networks.aws_vpc_main_id
   aws_subnet_ids = module.networks.private_aws_subnet_ids
-  db_password = "dopfiushobvypsurib4328907452kedwkvo_%tfs"
+  db_password = local.envs["DB_PASSWORD"]
   db_name = "b3db"
   db_username = "postgres"
 }
@@ -49,9 +49,14 @@ module "ecs" {
   frontend_url = "https://holomatch.org"
   cognito_user_pool_client_id = module.cognito.user_pool_client_id
   cognito_hosted_ui_domain = module.cognito.hosted_ui_domain
-  certificate_arn = module.route53.certificate_arn
+  certificate_arn = module.certificate.certificate_arn
   aws_access_key = local.envs["AWS_ACCESS_KEY_ID"]
   aws_secret_key = local.envs["AWS_SECRET_KEY"]
+}
+
+module "certificate" {
+  source = "./modules/certificate"
+  domain_name = "holomatch.org"
 }
 
 module "route53" {
@@ -59,6 +64,7 @@ module "route53" {
   domain_name = "holomatch.org"
   alb_dns_name = module.ecs.load_balancer_dns_name
   alb_zone_id = module.ecs.load_balancer_zone_id
+  validation_records = module.certificate.domain_validation_options_mapped
 }
 
 # if i want to activate everything again
