@@ -17,3 +17,8 @@ output "load_balancer_zone_id" {
   description = "Zone ID of the load balancer"
   value       = aws_lb.main.zone_id
 }
+
+output "backend_target_group_arn" {
+  description = "ARN of the backend target group"
+  value       = module.backend.backend_target_group_arn
+}

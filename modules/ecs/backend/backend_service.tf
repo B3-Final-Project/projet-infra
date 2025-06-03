@@ -12,10 +12,21 @@ resource "aws_ecs_service" "backend" {
     assign_public_ip = false
   }
 
+  # Load balancer configuration for API access
+  load_balancer {
+    target_group_arn = aws_lb_target_group.backend_api.arn
+    container_name   = "backend"
+    container_port   = 8080
+  }
+
   # Service Discovery for internal communication
   service_registries {
     registry_arn = aws_service_discovery_service.backend.arn
   }
+
+  depends_on = [
+    aws_lb_target_group.backend_api
+  ]
 
   tags = {
     Name = "b3-backend-service"

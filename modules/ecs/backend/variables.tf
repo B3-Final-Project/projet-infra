@@ -68,7 +68,7 @@ variable "aws_service_discovery_main_dns_namespace" {
     type        = string
 }
 
-variable "cognito_user_pool_id" {
+variable "cognito_user_pool_domain" {
   description = "The ID of the Cognito User Pool."
   type        = string
 }
@@ -78,7 +78,17 @@ variable "s3_bucket_name" {
   type        = string
 }
 
+variable "alb_dns_name" {
+  description = "The DNS name of the Application Load Balancer."
+  type        = string
+}
+
 variable "frontend_url" {
   description = "The URL of the frontend application."
+  type        = string
+}
+
+variable "alb_security_group_id" {
+  description = "The security group ID for the Application Load Balancer (ALB)."
   type        = string
 }

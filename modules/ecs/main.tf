@@ -14,10 +14,12 @@ module "backend" {
   aws_secret_key = var.aws_secret_key
   aws_service_discovery_main_dns_namespace = aws_service_discovery_private_dns_namespace.main.id
   frontend_ecs_security_group_id = module.frontend.aws_frontend_ecs_security_group_id
+  alb_security_group_id = aws_security_group.alb.id
   vpc_id = var.vpc_id
-  cognito_user_pool_id = var.cognito_user_pool_id
+  cognito_user_pool_domain = var.cognito_user_pool_domain
   s3_bucket_name = var.s3_bucket_name
   frontend_url = var.frontend_url
+  alb_dns_name = aws_lb.main.dns_name
 }
 
 module "frontend" {
@@ -32,7 +34,7 @@ module "frontend" {
   vpc_id = var.vpc_id
   aws_alb_security_group_id = aws_security_group.alb.id
   frontend_url = var.frontend_url
-  backend_url = "http://backend.local:3000"
+  backend_url = "https://holomatch.org"  # Use HTTPS through ALB for API calls
   s3_bucket_name = var.s3_bucket_name
   certificate_arn = var.certificate_arn
 }

@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "frontend" {
   container_definitions = jsonencode([
     {
       name      = "frontend"
-      image     = "${var.ecr_frontend_repository_url}:9a4875ec85bec6c37e56ea7b71d5e6392297a0ae"
+      image     = "${var.ecr_frontend_repository_url}:c97e01670c3f7b126b29144341cb0928ccd26efc"
       essential = true
 
       portMappings = [
@@ -23,12 +23,8 @@ resource "aws_ecs_task_definition" "frontend" {
 
       environment = [
         {
-          name  = "BASE_URL"
+          name  = "NEXT_PUBLIC_BASE_URL"
           value = "${var.backend_url}/api"
-        },
-        {
-          name = "NEXT_PUBLIC_COGNITO_CALLBACK_URL"
-          value = var.frontend_url
         },
         {
           name = "NODE_ENV"

@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "default" {
 
 # AWS Secrets Manager secret for database password
 resource "aws_secretsmanager_secret" "db_password" {
-  name        = "b3-db-password-tf-2"
+  name        = "b3-db-password-tf-4"
   description = "Password for the B3 PostgreSQL database"
 
   tags = {

@@ -8,6 +8,11 @@ output "user_pool_client_id" {
   value = aws_cognito_user_pool_client.tf--cognito_user_pool_client.id
 }
 
+output "user_pool_oidc_discovery_domain" {
+  description = "Domain of the Cognito User Pool"
+  value = "https://cognito-idp.eu-west-3.amazonaws.com/${aws_cognito_user_pool.tf--cognito_user_pool.id}"
+}
+
 output "hosted_ui_domain" {
   description = "Cognito hosted UI domain"
   value = "https://${aws_cognito_user_pool_domain.tf--cognito_user_pool_domain.domain}.auth.${var.region}.amazoncognito.com"
