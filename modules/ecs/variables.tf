@@ -60,8 +60,13 @@ variable "db_password_secret_arn" {
   type        = string
 }
 
-variable "cognito_user_pool_domain" {
+variable "cognito_user_pool_discovery_domain" {
   description = "The ID of the Cognito User Pool"
+  type        = string
+}
+
+variable "cognito_client_id" {
+  description = "The client ID for the Cognito User Pool"
   type        = string
 }
 

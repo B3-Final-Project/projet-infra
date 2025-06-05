@@ -14,7 +14,6 @@ module "rds" {
   source = "./modules/rds"
   aws_vpc_id = module.networks.aws_vpc_main_id
   aws_subnet_ids = module.networks.private_aws_subnet_ids
-  db_password = local.envs["DB_PASSWORD"]
   db_name = "b3db"
   db_username = "postgres"
 }
@@ -44,7 +43,8 @@ module "ecs" {
   db_name = "b3db"
   db_username = "postgres"
   db_password_secret_arn = module.rds.db_password_secret_arn
-  cognito_user_pool_domain = module.cognito.user_pool_oidc_discovery_domain
+  cognito_user_pool_discovery_domain = module.cognito.user_pool_oidc_discovery_domain
+  cognito_client_id = module.cognito.user_pool_client_id
   s3_bucket_name = module.s3.bucket_name
   frontend_url = "https://holomatch.org"
   certificate_arn = module.certificate.certificate_arn

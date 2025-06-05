@@ -19,9 +19,3 @@ variable "db_username" {
   type        = string
   default     = "postgres_admin"
 }
-
-variable "db_password" {
-  description = "Master password for the database"
-  type        = string
-  sensitive   = true
-}
