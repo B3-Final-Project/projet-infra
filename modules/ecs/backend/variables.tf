@@ -68,11 +68,6 @@ variable "aws_service_discovery_main_dns_namespace" {
     type        = string
 }
 
-variable "cognito_client_id" {
-  description = "The client ID for the Cognito User Pool."
-  type        = string
-}
-
 variable "cognito_user_pool_domain" {
   description = "The ID of the Cognito User Pool."
   type        = string

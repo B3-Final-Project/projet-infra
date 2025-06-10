@@ -103,3 +103,11 @@ resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
     sms_message          = "Your verification code is {####}."
   }
 }
+
+# Admin group for privileged users
+resource "aws_cognito_user_group" "admin_group" {
+  name         = "admin"
+  description  = "Admin group for privileged users"
+  user_pool_id = aws_cognito_user_pool.tf--cognito_user_pool.id
+  precedence   = 1
+}

@@ -44,6 +44,7 @@ module "ecs" {
   db_username = "postgres"
   db_password_secret_arn = module.rds.db_password_secret_arn
   cognito_user_pool_discovery_domain = module.cognito.user_pool_oidc_discovery_domain
+  cognito_user_pool_domain = module.cognito.hosted_ui_domain
   cognito_client_id = module.cognito.user_pool_client_id
   s3_bucket_name = module.s3.bucket_name
   frontend_url = "https://holomatch.org"
