@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "backend" {
   container_definitions = jsonencode([
     {
       name      = "backend"
-      image     = "${var.ecr_backend_repository_url}:76c8074e124831bd90cf9a442c0f730884604e88"
+      image     = "${var.ecr_backend_repository_url}:a2ff46c42689858ab2304bd7a715f8016d19b60e"
       essential = true
 
       portMappings = [
@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "backend" {
         {name: "AWS_ACCESS_KEY_ID", value: var.aws_access_key},
         {name: "AWS_SECRET_ACCESS_KEY", value: var.aws_secret_key},
         {name: "COGNITO_USER_POOL", value: var.cognito_user_pool_domain},
-        {name: "COGNITO_CLIENT_ID", value: var.cognito_client_id },
+        {name: "COGNITO_CLIENT_ID", value: "m3c4vovah53juakobk8j3jap2" },
         {name: "COGNITO_HOSTED_UI_DOMAIN", value: "https://auth-holomatch.auth.eu-west-3.amazoncognito.com"},
         {name: "S3_BUCKET_NAME", value: var.s3_bucket_name},
         {name: "FRONTEND_URL", value: var.frontend_url},
