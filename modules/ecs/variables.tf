@@ -85,3 +85,8 @@ variable "certificate_arn" {
   type        = string
   default     = null
 }
+
+variable "cognito_user_pool_domain" {
+  description = "Cognito user pool domain for authentication"
+  type        = string
+}

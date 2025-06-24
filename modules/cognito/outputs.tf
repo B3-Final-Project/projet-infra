@@ -25,3 +25,18 @@ output "aws_cognito_user_pool_client_tf--b3-dating-app_400ece0ohqfefqun2ktbv0403
 output "aws_cognito_user_pool_tf--User-pool--1zfokm_eu-west-3_018AFPXZG_id" {
   value = aws_cognito_user_pool.tf--cognito_user_pool.id
 }
+
+output "admin_group_name" {
+  description = "Name of the admin user group"
+  value       = aws_cognito_user_group.admin_group.name
+}
+
+output "admin_group_id" {
+  description = "ID of the admin user group"
+  value       = aws_cognito_user_group.admin_group.id
+}
+
+output "admin_emails" {
+  description = "List of email addresses that get admin privileges"
+  value       = local.admin_emails
+}

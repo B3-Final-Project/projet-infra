@@ -28,19 +28,18 @@ resource "aws_secretsmanager_secret" "db_password" {
 
 resource "aws_secretsmanager_secret_version" "db_password" {
   secret_id     = aws_secretsmanager_secret.db_password.id
-  secret_string = random_password.postgres_password
-  secret_string_wo = ""
+  secret_string = random_password.postgres_password.result
 }
 
 # RDS PostgreSQL instance (free-tier eligible)
 resource "aws_db_instance" "postgres" {
   allocated_storage      = 20
   engine                 = "postgres"
-  engine_version         = "17.3"
+  engine_version         = "17.5"
   instance_class         = "db.t4g.micro"
   db_name                = var.db_name
   username               = var.db_username
-  password               = random_password.postgres_password
+  password               = random_password.postgres_password.result
   publicly_accessible    = false
   vpc_security_group_ids = [aws_security_group.postgres_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.default.name

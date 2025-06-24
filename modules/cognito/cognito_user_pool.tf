@@ -1,3 +1,12 @@
+locals {
+  admin_emails = [
+    "mpinderwhite@proton.me",
+    # Add more admin emails here as needed
+    # "admin2@example.com",
+    # "admin3@example.com",
+  ]
+}
+
 resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
   account_recovery_setting {
     recovery_mechanism {
@@ -102,4 +111,12 @@ resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
     email_subject        = "Welcome to Holomatch"
     sms_message          = "Your verification code is {####}."
   }
+}
+
+# Admin group for privileged users
+resource "aws_cognito_user_group" "admin_group" {
+  name         = "admin"
+  description  = "Admin group for privileged users"
+  user_pool_id = aws_cognito_user_pool.tf--cognito_user_pool.id
+  precedence   = 1
 }
