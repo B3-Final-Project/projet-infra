@@ -1,3 +1,12 @@
+locals {
+  admin_emails = [
+    "mpinderwhite@proton.me",
+    # Add more admin emails here as needed
+    # "admin2@example.com",
+    # "admin3@example.com",
+  ]
+}
+
 resource "aws_cognito_user_pool" "tf--cognito_user_pool" {
   account_recovery_setting {
     recovery_mechanism {
