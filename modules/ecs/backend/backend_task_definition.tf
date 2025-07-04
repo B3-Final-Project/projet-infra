@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "backend" {
   container_definitions = jsonencode([
     {
       name      = "backend"
-      image     = "${var.ecr_backend_repository_url}:a2ff46c42689858ab2304bd7a715f8016d19b60e"
+      image     = "${var.ecr_backend_repository_url}:9d78eb7184b9130bbb0023ea2caebdcc291f6c18"
       essential = true
 
       portMappings = [
