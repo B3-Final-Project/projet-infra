@@ -8,6 +8,10 @@ resource "aws_lb" "main" {
 
   enable_deletion_protection = false
 
+  # WebSocket compatibility settings
+  idle_timeout = 300  # 5 minutes - increased for WebSocket connections
+  enable_http2 = true # Enable HTTP/2 for better performance
+
   tags = {
     Name = "b3-main-alb"
   }

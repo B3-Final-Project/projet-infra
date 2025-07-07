@@ -6,6 +6,16 @@ resource "aws_lb_target_group" "backend_api" {
   vpc_id      = var.vpc_id
   target_type = "ip"
 
+  # Sticky sessions for WebSocket connections
+  stickiness {
+    type            = "lb_cookie"
+    cookie_duration = 86400  # 24 hours
+    enabled         = true
+  }
+
+  # WebSocket-specific settings
+  deregistration_delay = 60  # 60 seconds for graceful WebSocket disconnection
+
   health_check {
     enabled             = true
     healthy_threshold   = 2

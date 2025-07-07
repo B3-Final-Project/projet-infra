@@ -16,7 +16,7 @@ module "backend" {
   frontend_ecs_security_group_id = module.frontend.aws_frontend_ecs_security_group_id
   alb_security_group_id = aws_security_group.alb.id
   vpc_id = var.vpc_id
-  cognito_user_pool_domain = var.cognito_user_pool_domain
+  cognito_user_pool_domain = var.cognito_user_pool_discovery_domain
   s3_bucket_name = var.s3_bucket_name
   frontend_url = var.frontend_url
   alb_dns_name = aws_lb.main.dns_name

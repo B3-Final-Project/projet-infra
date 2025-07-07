@@ -6,6 +6,16 @@ resource "aws_lb_target_group" "frontend" {
   vpc_id      = var.vpc_id
   target_type = "ip"
 
+  # Sticky sessions for session consistency
+  stickiness {
+    type            = "lb_cookie"
+    cookie_duration = 86400  # 24 hours
+    enabled         = true
+  }
+
+  # Connection draining for graceful shutdowns
+  deregistration_delay = 60  # 60 seconds
+
   health_check {
     enabled             = true
     healthy_threshold   = 2
